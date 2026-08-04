@@ -1,7 +1,23 @@
 package health
 
-import "net/http"
+import (
+	"net/http"
 
+	"github.com/gabrielteiga/webhook-dispatcher/internal/api/dto/response"
+)
+
+// Status godoc
+//
+// @Summary 	Get Status
+// @Description Get server status health
+// @Tags		health
+// @Produce		json
+// @Success		200 {object} response.BaseResponse[any]
+// @Router		/health [get]
 func Status(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("It's everything fine!"))
+	response.WriteJSON(
+		w,
+		http.StatusOK,
+		response.SuccessWithoutData("It's everything fine!"),
+	)
 }

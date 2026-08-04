@@ -1,0 +1,31 @@
+definitions:
+  BaseResponse-any:
+    properties:
+      data: {}
+      message:
+        type: string
+      success:
+        type: boolean
+    type: object
+info:
+  contact: {}
+  description: receive request from webhooks and deliver them async and reliable
+  title: Webhook Dispatcher
+  version: "1.0"
+paths:
+  /health:
+    get:
+      description: Get server status health
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponse-any'
+      summary: Get Status
+      tags:
+      - health
+schemes:
+- http
+swagger: "2.0"
