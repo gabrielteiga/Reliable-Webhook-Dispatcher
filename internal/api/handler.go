@@ -2,6 +2,7 @@ package api
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"strings"
 
@@ -12,12 +13,18 @@ import (
 )
 
 func PopulateHandlers(mux *http.ServeMux) {
+	log.Printf("[INFO] - Populate api routes start")
+
 	healthRoute(mux, "")
 	swaggerRoute(mux, "")
 	v1Routes(mux, "/api/v1")
+
+	log.Printf("[INFO] - Populate api routes finished")
 }
 
 func swaggerRoute(mux *http.ServeMux, prefix string) {
+	log.Printf("[INFO] - Populating swagger route")
+
 	mux.Handle(
 		createRoute(http.MethodGet, prefix, "/swagger/"),
 		httpSwagger.WrapHandler,
@@ -25,6 +32,8 @@ func swaggerRoute(mux *http.ServeMux, prefix string) {
 }
 
 func healthRoute(mux *http.ServeMux, prefix string) {
+	log.Printf("[INFO] - Populating health route")
+
 	mux.Handle(
 		createRoute(http.MethodGet, prefix, "/health"),
 		middleware.HandlerLogger(http.HandlerFunc(health.Status)),
@@ -32,6 +41,8 @@ func healthRoute(mux *http.ServeMux, prefix string) {
 }
 
 func v1Routes(mux *http.ServeMux, prefix string) {
+	log.Printf("[INFO] - Populating v1 routes")
+
 	mux.Handle(
 		createRoute(http.MethodGet, prefix, "/example"),
 		middleware.HandlerLogger(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
