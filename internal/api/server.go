@@ -1,21 +1,34 @@
 package api
 
 import (
-	"fmt"
-	"log"
+	"context"
+	"errors"
 	"net/http"
 )
 
-const SERVER_PORT string = ":8080"
+type Server struct {
+	server *http.Server
+}
 
-func Run() {
-	mux := http.NewServeMux()
-
-	PopulateHandlers(mux)
-
-	log.Printf("[INFO] - Starting server at port=%s", SERVER_PORT)
-
-	if err := http.ListenAndServe(SERVER_PORT, mux); err != nil {
-		fmt.Println("shutdown http server")
+func NewServer(address string, handler http.Handler) *Server {
+	return &Server{
+		server: &http.Server{
+			Addr:    address,
+			Handler: handler,
+		},
 	}
+}
+
+func (s *Server) Run() error {
+	err := s.server.ListenAndServe()
+
+	if errors.Is(err, http.ErrServerClosed) {
+		return nil
+	}
+
+	return err
+}
+
+func (s *Server) Shutdown(ctx context.Context) error {
+	return s.server.Shutdown(ctx)
 }

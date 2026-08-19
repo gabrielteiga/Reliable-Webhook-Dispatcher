@@ -11,14 +11,18 @@ import (
 	httpSwagger "github.com/swaggo/http-swagger/v2"
 )
 
-func PopulateHandlers(mux *http.ServeMux) {
-	log.Printf("[INFO] - Populate api routes start")
+func NewRouter() http.Handler {
+	mux := http.NewServeMux()
+
+	log.Printf("[INFO] - Routes is beeing populate")
 
 	swaggerRoute(mux, "")
 	healthRoute(mux, "")
 	v1Routes(mux, "/api/v1")
 
-	log.Printf("[INFO] - Populate api routes finished")
+	log.Printf("[INFO] - Routes populated")
+
+	return mux
 }
 
 func swaggerRoute(mux *http.ServeMux, prefix string) {
