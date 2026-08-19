@@ -13,6 +13,15 @@ info:
   title: Webhook Dispatcher
   version: "1.0"
 paths:
+  /api/v1/webhook:
+    post:
+      description: Create a new webhook to be dispatch by our app
+      produces:
+      - application/json
+      responses: {}
+      summary: Create new webhook
+      tags:
+      - webhook
   /health:
     get:
       description: Get server status health

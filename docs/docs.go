@@ -15,6 +15,19 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/api/v1/webhook": {
+            "post": {
+                "description": "Create a new webhook to be dispatch by our app",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "webhook"
+                ],
+                "summary": "Create new webhook",
+                "responses": {}
+            }
+        },
         "/health": {
             "get": {
                 "description": "Get server status health",

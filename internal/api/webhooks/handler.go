@@ -7,6 +7,13 @@ import (
 	"github.com/gabrielteiga/webhook-dispatcher/internal/api/response"
 )
 
+// Status godoc
+//
+// @Summary 	Create new webhook
+// @Description Create a new webhook to be dispatch by our app
+// @Tags		webhook
+// @Produce		json
+// @Router		/api/v1/webhook [post]
 func CreateWebhooks(w http.ResponseWriter, r *http.Request) {
 	var webhooksRequest WebhooksRequest
 
