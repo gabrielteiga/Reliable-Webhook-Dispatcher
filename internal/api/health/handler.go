@@ -3,7 +3,7 @@ package health
 import (
 	"net/http"
 
-	"github.com/gabrielteiga/webhook-dispatcher/internal/api/dto/response"
+	"github.com/gabrielteiga/webhook-dispatcher/internal/api/response"
 )
 
 // Status godoc
