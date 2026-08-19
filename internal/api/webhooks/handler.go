@@ -14,7 +14,7 @@ import (
 // @Tags		webhook
 // @Produce		json
 // @Router		/api/v1/webhook [post]
-func CreateWebhooks(w http.ResponseWriter, r *http.Request) {
+func Create(w http.ResponseWriter, r *http.Request) {
 	var webhooksRequest WebhooksRequest
 
 	body := r.Body
